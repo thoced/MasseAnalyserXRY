@@ -187,12 +187,13 @@ public class MainViewController implements Initializable
               AnchorPane pane = loader.load();
               
               SheetFrameController sfc = loader.getController();
-              
-          
+    
             // lancement du wizard d'importation
               Scene scene = new Scene(pane);
               Stage stage = new Stage();
               stage.setScene(scene);
+            // titre de la vue
+              stage.setTitle("Wizard d'importation et recherche");
               stage.showAndWait();
               
            // fin du wizard, on regarde si le model est rempli et prêt
