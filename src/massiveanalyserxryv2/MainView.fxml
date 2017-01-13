@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="massiveanalyserxryv2.MainViewController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="22.0" prefWidth="1024.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Fichier">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleOpenWizardImport" text="Recherche de masse" />
+              <MenuItem mnemonicParsing="false" text="Fermer" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edition">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Gestion des Db" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleOpenHelp" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane layoutX="34.0" layoutY="29.0" prefHeight="739.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+         <center>
+            <TableView fx:id="tableauResultat" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="150.0" text="Numéro de ligne" />
+                <TableColumn minWidth="0.0" prefWidth="715.0" text="Contenu" />
+                  <TableColumn prefWidth="158.0" text="Mots clé utilisés" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
