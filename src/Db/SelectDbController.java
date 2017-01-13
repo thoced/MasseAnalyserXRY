@@ -55,6 +55,14 @@ public class SelectDbController implements Initializable
        }
     }
     
+     @FXML
+    public void handleCancel()
+    {
+        // Cancel et fermeture
+        modelDataSearch.setBeReady(false);
+        listDb.getScene().getWindow().hide();
+    }
+    
     @FXML
     public void handleCloseAndSearch()
     {
