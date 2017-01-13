@@ -5,7 +5,6 @@
  */
 package massiveanalyserxryv2;
 
-import Core.ControllerBase;
 import Import.SheetFrameController;
 import Model.DataContent;
 import Model.DataResultat;

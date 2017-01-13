@@ -5,7 +5,7 @@
  */
 package Help;
 
-import Core.ControllerBase;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -17,18 +17,13 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Thonon
  */
-public class HelpController extends ControllerBase{
+public class HelpController implements Initializable{
+        
 
     @FXML
     private AnchorPane anchore;
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) 
-    {
-        super.initialize(location, resources); //To change body of generated methods, choose Tools | Templates.
-        
-        
-    }
+    
 
    @FXML
    public void handleCloseHelp()
@@ -36,5 +31,10 @@ public class HelpController extends ControllerBase{
        // fermeture
        anchore.getScene().getWindow().hide();
    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+    }
     
 }
