@@ -209,12 +209,13 @@ public class SheetFrameController implements Initializable, EventHandler {
             // ouverture du frame de sélection de la bd de recherche
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Db/SelectDbView.fxml"));
             // creation de la scene
-            AnchorPane anchor = loader.load();
+            AnchorPane anchor = loader.load(); 
             Scene scene = new Scene(anchor);
             // creation du Stage
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Wizard d'importation et recherche");
             stage.showAndWait();
             // fermeture de la vue sheet
             listSheet.getScene().getWindow().hide();
