@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -12,6 +13,11 @@
                <children>
                   <Button defaultButton="true" layoutX="534.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Fermer" />
                   <TextArea editable="false" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="581.0" text="Massive Analyser XRY&#10;&#10;Outil de recherche massive par mots clés&#10;&#10;Programmé par THONON Cédric" AnchorPane.leftAnchor="14.0" />
+      <ImageView fitHeight="200.0" fitWidth="307.0" layoutX="147.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Ressources/logo.png" />
+         </image>
+      </ImageView>
                </children>
             
 </AnchorPane>
