@@ -13,7 +13,7 @@
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#handleOpenWizardImport" text="Recherche de masse" />
-              <MenuItem mnemonicParsing="false" text="Fermer" />
+              <MenuItem mnemonicParsing="false" onAction="#handleCloseApp" text="Quitter" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edition">

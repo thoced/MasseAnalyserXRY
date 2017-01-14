@@ -68,6 +68,14 @@ public class MainViewController implements Initializable
     }
     
     @FXML
+    public void handleCloseApp(ActionEvent event)
+    {
+        // fermeture de l'application
+        anchor.getScene().getWindow().hide();
+       
+    }
+    
+    @FXML
     public void handleOpenHelp(ActionEvent event) throws IOException
     {
         // chargement du de la vue
@@ -174,7 +182,7 @@ public class MainViewController implements Initializable
                 new FileChooser.ExtensionFilter("Fichier Excel (XLSX)", "*.xlsx"),
                 new FileChooser.ExtensionFilter("Fichier Excel (XLTX)",".*.xltx"));
         fc.setTitle("Choisissez le fichier à importer");
-      
+            
         
         modelDataSearch.setFile(fc.showOpenDialog(anchor.getScene().getWindow()));
        
