@@ -6,54 +6,49 @@
 package massiveanalyserxryv2;
 
 import Import.SheetFrameController;
-import Model.DataContent;
 import Model.DataResultat;
 import Model.DataSearch;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 
 /**
  *
  * @author Thonon
  */
-public class MainViewController implements Initializable
+public class MainViewController implements Initializable, EventHandler
 {
     public static DataSearch modelDataSearch;
     @FXML
     private AnchorPane anchor;
     @FXML
     private TableView tableauResultat;
+    
+    private  ServiceTaskSearch search;
   
  
     @Override
@@ -94,82 +89,7 @@ public class MainViewController implements Initializable
 
     }
     
-    private void startSearch() throws FileNotFoundException, IOException, InvalidFormatException
-    {
-        // récupération de la liste des mots clés
-        String path = System.getProperty("user.dir");
-        path = path + "/db/";
-        path = path + modelDataSearch.getNameDb();
-        
-        
-        
-        ArrayList<String> keyWords = new ArrayList<String>();
-        keyWords.clear();
-        // lecture 
-        for(String line : Files.readAllLines(Paths.get(path)))
-        {
-            keyWords.add(line);
-        }
-        
-        // récupération de la liste des contents du tableau excel
-         Workbook book = WorkbookFactory.create(modelDataSearch.getFile());
-        // récupération du sheet
-         Sheet sheet = book.getSheet(modelDataSearch.getNameSheet());
-         // récupération de la colonne
-         int top = sheet.getFirstRowNum();
-         int down = sheet.getLastRowNum();
-         Row row = sheet.getRow(top);
-         // on parse les column jusqu'a ce que le nom soit le meme que celui dans le modele
-         short start = row.getFirstCellNum();
-         short end = row.getLastCellNum();
-         int indiceColumn = -1;
-         for(short i=start ; i <= end ; i++)
-         {
-             if(row.getCell(i).getStringCellValue().equals(modelDataSearch.getNameColumn()))
-             {
-                 // on connait l'indice de column
-                 indiceColumn = i;
-                 break;
-             }
-         }
-         
-         // création de la liste des contents
-         ArrayList<DataContent> listContent = new ArrayList<DataContent>();
-         listContent.clear();
-         for(int j=top;j<=down;j++)
-         {
-             if(sheet.getRow(j) != null)
-             {
-                if((sheet.getRow(j).getCell(indiceColumn).getCellType() == CellType.STRING.getCode()))
-                {
-                    DataContent data = new DataContent(j,sheet.getRow(j).getCell(indiceColumn).getStringCellValue());
-                    listContent.add(data);
-                }
-             }
-         }
-     
-         // création de l'observable list
-         ObservableList<DataResultat> ob = FXCollections.observableArrayList();
-         
-         // recherches
-         for(DataContent content : listContent)
-         {
-             for(String key : keyWords)
-             {
-                 if(key.isEmpty())
-                     continue;
-                 
-                    int res = content.getContent().toLowerCase().indexOf(key.toLowerCase());
-                    if(res != -1)
-                    {
-                        DataResultat data = new DataResultat(content.getNumRow() + 1,content.getContent(),key); // +1 car dans le fichie excel les row commence à 1 et pas à 0
-                        ob.add(data);
-                    }
-             }
-         }
-         
-         tableauResultat.setItems(ob);
-    }
+    
     
     @FXML
     public void handleOpenWizardImport(ActionEvent event) throws IOException, FileNotFoundException, InvalidFormatException
@@ -212,17 +132,34 @@ public class MainViewController implements Initializable
                 // effacement du tableau
                 tableauResultat.getItems().clear();
                 // lancement de la recherche
-                this.startSearch();
+                search = new ServiceTaskSearch();
+                search.addEventHandler(EventType.ROOT, this);
+               
+                // création de l'observable list
+                ObservableList<DataResultat> ob = FXCollections.observableArrayList();
+                tableauResultat.setItems(ob);
+                // set de l'observable list au service pour mise à jour
+                search.setOb(ob);
+                search.start();
            }
         }
     }
 
-  
+    @Override
+    public void handle(Event event) 
+    {
+        if(event.getSource() == search)
+        {
+                    
+           if(search.getState() == Worker.State.SUCCEEDED)
+           {
+               // le thread de recherche à terminé et a retourné un code succeeded
+               // on récupère la valeur observable list
+               System.out.println("SUCCED");
+               tableauResultat.refresh();
+          }
+        }
+    }
 
-   
-   
-    
-   
-    
-    
+  
 }
