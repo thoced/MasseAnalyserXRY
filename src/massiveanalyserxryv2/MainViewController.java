@@ -183,6 +183,7 @@ public class MainViewController implements Initializable
                 new FileChooser.ExtensionFilter("Fichier Excel (XLTX)",".*.xltx"));
         fc.setTitle("Choisissez le fichier à importer");
             
+        fc.setInitialDirectory(new File(System.getProperty("user.dir")));
         
         modelDataSearch.setFile(fc.showOpenDialog(anchor.getScene().getWindow()));
        
