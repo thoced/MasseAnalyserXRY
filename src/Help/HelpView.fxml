@@ -12,7 +12,7 @@
       
                <children>
                   <Button defaultButton="true" layoutX="534.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleCloseHelp" text="Fermer" />
-                  <TextArea editable="false" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="581.0" text="Massive Analyser XRY&#10;&#10;Outil de recherche massive par mots clés&#10;&#10;Programmé par THONON Cédric" AnchorPane.leftAnchor="14.0" />
+                  <TextArea editable="false" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="581.0" text="Massive Analyser XRY&#10;Outil de recherche massive par mots clés&#10;Programmé par THONON Cédric&#10;&#10;Mode d'emploi:&#10;- Pour importer et effectuer des recherches de masse sur une extraction XRY (fichier Excel)&#10;1) Cliquez sur le bouton Fichier -&gt; Recherche de Masse&#10;2) Après avoir choisi le fichier, sélectionnez l'onglet et la colonne sur lesquels les recherches seront&#10;    effectuées. Appuyez ensuite sur le bouton suivant.&#10;3) Sélectionnez la base de donnée avec laquelle les recherches seront effectuées, appuyez ensuite sur le&#10;    bouton, lancez la recherche. Les résultats s'affiche sur l'application.&#10;" AnchorPane.leftAnchor="14.0" />
       <ImageView fitHeight="200.0" fitWidth="307.0" layoutX="147.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Ressources/logo.png" />
