@@ -10,6 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.concurrent.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -18,17 +21,33 @@ import javafx.stage.Stage;
 public class MassiveAnalyserXRYV2 extends Application {
     
     @Override
-    public void start(Stage stage) throws Exception 
+    public void start(Stage primaryStage) throws Exception 
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
         Parent root = loader.load();
         
+        // lancement du logo
+        FXMLLoader loaderLogo = new FXMLLoader(getClass().getResource("LogoStartView.fxml"));
+        AnchorPane anchorLogo = loaderLogo.load();
+        Scene sceneLogo = new Scene(anchorLogo);
+        Stage stage = new Stage();
+        stage.setScene(sceneLogo);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setIconified(false);
+        stage.setAlwaysOnTop(true);
+        stage.showAndWait();
+        
+        
+        
          // récupération du controller du MainView
         MainViewController mvc = loader.getController();
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Massive Analyser XRY");
-        stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Massive Analyser XRY");
+        primaryStage.show();
+       
+        
+        
     }
 
     /**
