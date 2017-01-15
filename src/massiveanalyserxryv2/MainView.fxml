@@ -16,6 +16,11 @@
               <MenuItem mnemonicParsing="false" onAction="#handleCloseApp" text="Quitter" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Edition">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handlePrinterStartJob" text="Imprimer les résultats" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Aide">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleOpenHelp" text="About" />
