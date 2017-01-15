@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.concurrent.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 
@@ -45,10 +46,10 @@ public class MassiveAnalyserXRYV2 extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Massive Analyser XRY");
         primaryStage.setIconified(false);
+        // ajout de l'icon d'application
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/Ressources/icon.png")));
         primaryStage.show();
-       
-        
-        
+
     }
 
     /**
