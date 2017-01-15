@@ -31,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -96,13 +97,18 @@ public class SheetFrameController implements Initializable, EventHandler {
                 }
                 
                 
-            } catch (FileNotFoundException ex) {
+            } catch (FileNotFoundException ex) 
+            {
                 Logger.getLogger(SheetFrameController.class.getName()).log(Level.SEVERE, null, ex);
+                this.alertException(ex.getMessage());
             } catch (IOException ex) {
+                this.alertException(ex.getMessage());
                 Logger.getLogger(SheetFrameController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvalidFormatException ex) {
+                this.alertException(ex.getMessage());
                 Logger.getLogger(SheetFrameController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (EncryptedDocumentException ex) {
+                this.alertException(ex.getMessage());
                 Logger.getLogger(SheetFrameController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -113,6 +119,15 @@ public class SheetFrameController implements Initializable, EventHandler {
         
         listSheet.setItems(ol);
     }
+    
+    private void alertException(String message)
+    {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Exception Warning");
+        alert.setHeaderText("Warning");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
     /**
      * Initializes the controller class.
      */
@@ -120,7 +135,8 @@ public class SheetFrameController implements Initializable, EventHandler {
     public void initialize(URL url, ResourceBundle rb) 
     {
        // ajout d'un listener d'évenemnt sur le listSheet
-        listSheet.addEventHandler(EventType.ROOT, this);
+        listSheet.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
+
         // appel du updateListSheet
         this.updateListSheet();
     }  
@@ -129,10 +145,11 @@ public class SheetFrameController implements Initializable, EventHandler {
     @Override
     public void handle(Event event)
     {
+
       if(event.getSource() == listSheet)
       {
         
-        if(listSheet.getSelectionModel().getSelectedIndex() > -1 )
+        if(/*listSheet.getSelectionModel().getSelectedIndex() > -1*/ listSheet.getSelectionModel().getSelectedItem() != null )
         {
             // clear de la liste des columns
             listColumn.getSelectionModel().clearSelection();
@@ -151,10 +168,16 @@ public class SheetFrameController implements Initializable, EventHandler {
             // création du arraylist
             ArrayList al = new ArrayList();
             al.clear();
+            
+            // boolean exeption
+            boolean catchException = false;
+            
             for(int i=first ; i < last ; i++)
             {
                 Cell cell = row.getCell(i);
                 // on récupère le nom de la cellule
+                try
+                {
                 if(cell.getCellType() == CellType.STRING.getCode())
                 {                   
                                       
@@ -162,7 +185,16 @@ public class SheetFrameController implements Initializable, EventHandler {
                     // on ajoute la valeur dans le arraylist
                     al.add(value);
                 }
+                }
+                catch(java.lang.NullPointerException nle)
+                {
+                    catchException = true;
+                }
             }
+            
+            if(catchException)
+                 this.alertException("Un probleme est survenu dans la lecture d'une ou plusieurs cellules du fichier");
+            
             // on transverse le arraylist dans le observable list
             ObservableList<String> ol = FXCollections.observableArrayList(al);
             // on attache le ol dans le listColumn
@@ -225,7 +257,7 @@ public class SheetFrameController implements Initializable, EventHandler {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur de sélection");
             alert.setHeaderText("SELECTION D'ONGLET ET DE COLONNE");
-            alert.setContentText("Aucun onglet et/ou colonne ont été sélectionné");
+            alert.setContentText("Aucun onglet et/ou colonne n'a été sélectionné");
             alert.showAndWait();
             // on quitte le tout sans recherche
             listSheet.getScene().getWindow().hide();
