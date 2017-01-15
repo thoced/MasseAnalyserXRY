@@ -203,7 +203,7 @@ public class MainViewController implements Initializable, EventHandler
                Alert alert = new Alert(AlertType.INFORMATION);
                alert.setTitle("RECHERCHES");
                alert.setHeaderText("Recherches terminées avec succes");
-               alert.setContentText("La recherche sur base des mots clés est terminée, les résultats sont affichés.(une impression est possible en cliquant sur le bouton Edition - Imprimer les résultats). ");
+               alert.setContentText("La recherche sur base des mots clés est terminée, les résultats sont affichés. (une impression est possible en cliquant sur le bouton Edition - Imprimer les résultats). ");
                alert.showAndWait();
               
           }
