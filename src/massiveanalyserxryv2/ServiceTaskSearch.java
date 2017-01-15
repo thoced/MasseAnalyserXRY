@@ -52,9 +52,19 @@ public class ServiceTaskSearch<Object> extends Service
             protected Object call() throws Exception
             {
                  // récupération de la liste des mots clés
-               String path = System.getProperty("user.dir");
-                path = path + "/db/";
-                path = path + modelDataSearch.getNameDb();
+                // si il s'agit d'une base de donnée sélectionné dans la liste
+                String path;
+                if(modelDataSearch.getAbosoluthPathDb() == null)
+                {
+                    path = System.getProperty("user.dir");
+                    path = path + "/db/";
+                    path = path + modelDataSearch.getNameDb();
+                }
+                else
+                {
+                    // sinon on crée le path avec le chemin absolu (fichier importé)
+                    path = modelDataSearch.getAbosoluthPathDb();
+                }
                 
                 ArrayList<String> keyWords = new ArrayList<String>();
                 keyWords.clear();

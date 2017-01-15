@@ -5,6 +5,7 @@
  */
 package Db;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -14,7 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.FileChooser;
 import static massiveanalyserxryv2.MainViewController.modelDataSearch;
 
 /**
@@ -25,7 +28,9 @@ public class SelectDbController implements Initializable
 {
     @FXML
     private ListView listDb;
-
+    @FXML
+    private Label labelFileExtern;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) 
     {
@@ -63,11 +68,31 @@ public class SelectDbController implements Initializable
         listDb.getScene().getWindow().hide();
     }
     
+     @FXML
+    public void handleImportExternFile()
+    {
+        // ouverture de la boite de dialogue de recherche de fichier
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("*.*", "*.*"));    
+        fc.setTitle("Choisissez la base de donnée à importer");
+        // ouverture de la boite de dialog
+        File bdImport = fc.showOpenDialog(listDb.getScene().getWindow());
+        if(bdImport != null)
+        {
+            // mise à jour du label
+            labelFileExtern.setText(bdImport.getPath());
+            // si la bdImport n'est pas null, on place le chemin absolu du fichier dans le modelDataSearch
+            modelDataSearch.setAbosoluthPathDb(bdImport.getAbsolutePath());
+            
+        }
+      
+    }
+    
     @FXML
     public void handleCloseAndSearch()
     {
         // enregistrement dans le model du nom de la db
-        if(!listDb.getSelectionModel().isEmpty())
+        if(!listDb.getSelectionModel().isEmpty() || modelDataSearch.getAbosoluthPathDb() != null )
         {
          modelDataSearch.setNameDb((String)listDb.getSelectionModel().getSelectedItem());
          modelDataSearch.setBeReady(true);
