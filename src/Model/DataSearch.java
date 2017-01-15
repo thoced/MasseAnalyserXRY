@@ -21,12 +21,24 @@ public class DataSearch
     
     private String nameDb;
     
+    private String abosoluthPathDb;
+    
     private boolean beReady = false;
 
     public DataSearch() 
     {
         
     }
+
+    public String getAbosoluthPathDb() {
+        return abosoluthPathDb;
+    }
+
+    public void setAbosoluthPathDb(String abosoluthPathDb) {
+        this.abosoluthPathDb = abosoluthPathDb;
+    }
+    
+    
 
     public File getFile() {
         return file;
