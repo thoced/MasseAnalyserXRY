@@ -45,6 +45,7 @@ import javafx.scene.control.TitledPane;
 
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -129,6 +130,7 @@ public class MainViewController implements Initializable, EventHandler
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/Ressources/icon.png")));
         stage.showAndWait();
 
     }
@@ -167,6 +169,7 @@ public class MainViewController implements Initializable, EventHandler
               stage.setScene(scene);
             // titre de la vue
               stage.setTitle("Wizard d'importation et recherche");
+              stage.getIcons().add(new Image(getClass().getResourceAsStream("/Ressources/icon.png")));
               stage.showAndWait();
               
            // fin du wizard, on regarde si le model est rempli et prêt
