@@ -44,6 +44,7 @@ public class MassiveAnalyserXRYV2 extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Massive Analyser XRY");
+        primaryStage.setIconified(false);
         primaryStage.show();
        
         
