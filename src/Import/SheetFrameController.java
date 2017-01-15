@@ -31,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -248,6 +249,7 @@ public class SheetFrameController implements Initializable, EventHandler {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Wizard d'importation et recherche");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Ressources/icon.png")));
             stage.showAndWait();
             // fermeture de la vue sheet
             listSheet.getScene().getWindow().hide();
