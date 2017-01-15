@@ -25,10 +25,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.JobSettings;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -54,6 +63,9 @@ public class MainViewController implements Initializable
     private AnchorPane anchor;
     @FXML
     private TableView tableauResultat;
+    
+    // PrinterJob
+    private JobSettings jobSettings;
   
  
     @Override
@@ -65,6 +77,29 @@ public class MainViewController implements Initializable
                
        ((TableColumn)tableauResultat.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<DataResultat,Integer>("keyWord"));
                
+       
+    }
+    
+    
+    
+    @FXML
+    public void handlePrinterStartJob(ActionEvent event)
+    {
+
+       PrinterJob printer = PrinterJob.createPrinterJob();
+
+        ObservableList<DataResultat> ob = tableauResultat.getItems();
+        // Création d'un node listview pour l'impression
+        ListView lv = new ListView();
+        lv.setItems(ob);
+        // impression avec ouverture de boite de dialog printerconfig
+        if(printer.showPrintDialog(anchor.getScene().getWindow()))
+        {
+            if(printer.printPage(lv))
+                printer.endJob();
+           
+        }
+        
     }
     
     @FXML
