@@ -52,6 +52,13 @@ public class DataResultat
     public void setKeyWord(String key) {
         this.keyWord.set(key);
     }
+
+    @Override
+    public String toString() {
+        
+        // utilisé pour l'impression
+        return "Num ligne: " + numRow.get() + System.getProperty("line.separator") + "Contenu: " + content.get() + System.getProperty("line.separator") + System.getProperty("line.separator");
+    }
     
     
 }
