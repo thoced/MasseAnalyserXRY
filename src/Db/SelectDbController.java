@@ -83,7 +83,7 @@ public class SelectDbController implements Initializable
             labelFileExtern.setText(bdImport.getPath());
             // si la bdImport n'est pas null, on place le chemin absolu du fichier dans le modelDataSearch
             modelDataSearch.setAbosoluthPathDb(bdImport.getAbsolutePath());
-            
+                     
         }
       
     }

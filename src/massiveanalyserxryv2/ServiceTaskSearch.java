@@ -130,6 +130,9 @@ public class ServiceTaskSearch<Object> extends Service
                     }
                 }
                 
+                // Fermeture du workbook
+                if(book != null)
+                   book.close();
                 //tableauResultat.setItems(ob);
                 return (Object)ob;
                 
