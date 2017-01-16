@@ -220,8 +220,11 @@ public class SheetFrameController implements Initializable, EventHandler {
     }
     
     @FXML
-    public void OnCancel(ActionEvent e)
+    public void OnCancel(ActionEvent e) throws IOException
     {
+        // close du Workdbook si il était ouvert
+        if(book != null)
+           book.close();
         // fermeture de la fenetre
         ((Stage)bCancel.getScene().getWindow()).close();
     }
@@ -229,6 +232,9 @@ public class SheetFrameController implements Initializable, EventHandler {
     @FXML
     public void OnSuivant(ActionEvent e) throws IOException
     {
+         // close du Workdbook si il était ouvert
+        if(book != null)
+           book.close();
         // inscription dans le model du nom du sheet et du nom de la colonne
         if(!listSheet.getSelectionModel().isEmpty())
             modelDataSearch.setNameSheet((String)listSheet.getSelectionModel().getSelectedItem());
